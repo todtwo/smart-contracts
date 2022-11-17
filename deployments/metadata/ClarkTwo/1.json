@@ -1,0 +1,15 @@
+{
+  "description": "ClarkTwo 1 Metadata for blockchain project",
+  "image": "https://ipfs.filebase.io/ipfs/QmQkWw1X9cfuQvvw1xkZLx1F4aR4Gtc1BdqtZXgPzsKfmv/QmaZgEDqkmg37ubp8tdaxDdW4qR18i584xB2vDy5mFi7YP",
+  "name": "ClarkTwo 1",
+  "attributes": [
+    {
+      "trait_type": "Quantity",
+      "value": "7"
+    },
+    {
+      "trait_type": "Apperance",
+      "value": "Half"
+    }
+  ]
+}
