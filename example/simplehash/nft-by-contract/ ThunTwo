@@ -1,0 +1,73 @@
+{
+  "next": null,
+  "previous": null,
+  "nfts": [
+    {
+      "nft_id": "ethereum-goerli.0x40e3b499a062153158c90572f378132bab6ab07b.0",
+      "chain": "ethereum-goerli",
+      "contract_address": "0x40e3b499A062153158C90572f378132Bab6AB07B",
+      "token_id": "0",
+      "name": "ThunTwo 0",
+      "description": "ThunTwo 0 Metadata for blockchain project",
+      "image_url": "https://cdn.simplehash.com/assets/c60680790a1a93ac4e43fea9cd993ef0e6c41ad1454d1852dc690644301dc276.jpg",
+      "video_url": null,
+      "audio_url": null,
+      "model_url": null,
+      "previews": {
+        "image_small_url": "https://lh3.googleusercontent.com/6R0kAhPPe7RAiL3m-2-QMGbK5P3-5UvNJPzn7BXOTGYw6xp-yOZG9aQa1lSBFof8O6bPDUVlANsSrcdO2Vf2Iv0PbKfhfPgGTA=s250",
+        "image_medium_url": "https://lh3.googleusercontent.com/6R0kAhPPe7RAiL3m-2-QMGbK5P3-5UvNJPzn7BXOTGYw6xp-yOZG9aQa1lSBFof8O6bPDUVlANsSrcdO2Vf2Iv0PbKfhfPgGTA",
+        "image_large_url": "https://lh3.googleusercontent.com/6R0kAhPPe7RAiL3m-2-QMGbK5P3-5UvNJPzn7BXOTGYw6xp-yOZG9aQa1lSBFof8O6bPDUVlANsSrcdO2Vf2Iv0PbKfhfPgGTA=s1000",
+        "image_opengraph_url": "https://lh3.googleusercontent.com/6R0kAhPPe7RAiL3m-2-QMGbK5P3-5UvNJPzn7BXOTGYw6xp-yOZG9aQa1lSBFof8O6bPDUVlANsSrcdO2Vf2Iv0PbKfhfPgGTA=k-w1200-s2400-rj",
+        "blurhash": "UKDaN0}skB9]=LWUbHkBNaJ7I:I:Naa#WCS1"
+      },
+      "background_color": null,
+      "external_url": null,
+      "created_date": "2022-11-18T13:36:00",
+      "status": "minted",
+      "token_count": 1,
+      "owner_count": 1,
+      "owners": [
+        {
+          "owner_address": "0xD6d0109a09c8e92DE5258D9ABb12e10ce887EB28",
+          "quantity": 1,
+          "first_acquired_date": "2022-11-18T13:36:00",
+          "last_acquired_date": "2022-11-18T13:36:00"
+        }
+      ],
+      "last_sale": null,
+      "contract": {
+        "type": "ERC721",
+        "name": "ThunTwo",
+        "symbol": "TT"
+      },
+      "collection": {
+        "collection_id": null,
+        "name": null,
+        "description": null,
+        "image_url": null,
+        "banner_image_url": null,
+        "external_url": null,
+        "twitter_username": null,
+        "discord_url": null,
+        "marketplace_pages": [],
+        "metaplex_mint": null,
+        "metaplex_first_verified_creator": null,
+        "floor_prices": []
+      },
+      "extra_metadata": {
+        "attributes": [
+          {
+            "trait_type": "Sky Color",
+            "value": "Red - Purple"
+          },
+          {
+            "trait_type": "Thunder Style",
+            "value": "Vertical"
+          }
+        ],
+        "image_original_url": "ipfs://QmWUwXcYctHTpqjHZKKKXF6KyxQdoMxtak8SWFhW2TmSuS/0.jpg",
+        "animation_original_url": null
+      }
+    }
+  ]
+}

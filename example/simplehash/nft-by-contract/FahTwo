@@ -1,0 +1,69 @@
+{
+  "next": null,
+  "previous": null,
+  "nfts": [
+    {
+      "nft_id": "ethereum-goerli.0x13502ea6f6d14f00025a3adde02bff050be24532.0",
+      "chain": "ethereum-goerli",
+      "contract_address": "0x13502Ea6F6D14f00025a3AdDe02BFf050be24532",
+      "token_id": "0",
+      "name": "FahTwo 0",
+      "description": "FahTwo 0 Metadata for blockchain project",
+      "image_url": "https://cdn.simplehash.com/assets/2770d780ac7c23f6ecf69ea954eb8c35e10f68f8c285461708079fd80251823a.jpg",
+      "video_url": null,
+      "audio_url": null,
+      "model_url": null,
+      "previews": {
+        "image_small_url": "https://lh3.googleusercontent.com/XxJHsdvM2hH_W-AsS_uSVAjwy_Bcp69CwdqwNY1uZPYrZs8DZy19kODSU5eIm-YT29yeNpdusmTD8wnh8Eu87f_Bu-he-Pjvj9E=s250",
+        "image_medium_url": "https://lh3.googleusercontent.com/XxJHsdvM2hH_W-AsS_uSVAjwy_Bcp69CwdqwNY1uZPYrZs8DZy19kODSU5eIm-YT29yeNpdusmTD8wnh8Eu87f_Bu-he-Pjvj9E",
+        "image_large_url": "https://lh3.googleusercontent.com/XxJHsdvM2hH_W-AsS_uSVAjwy_Bcp69CwdqwNY1uZPYrZs8DZy19kODSU5eIm-YT29yeNpdusmTD8wnh8Eu87f_Bu-he-Pjvj9E=s1000",
+        "image_opengraph_url": "https://lh3.googleusercontent.com/XxJHsdvM2hH_W-AsS_uSVAjwy_Bcp69CwdqwNY1uZPYrZs8DZy19kODSU5eIm-YT29yeNpdusmTD8wnh8Eu87f_Bu-he-Pjvj9E=k-w1200-s2400-rj",
+        "blurhash": "UK3MB?jLVZf~g4a1kVaxQ9bXpHf9i]adaLkW"
+      },
+      "background_color": null,
+      "external_url": null,
+      "created_date": "2022-11-18T13:32:00",
+      "status": "minted",
+      "token_count": 1,
+      "owner_count": 1,
+      "owners": [
+        {
+          "owner_address": "0xD6d0109a09c8e92DE5258D9ABb12e10ce887EB28",
+          "quantity": 1,
+          "first_acquired_date": "2022-11-18T13:32:00",
+          "last_acquired_date": "2022-11-18T13:32:00"
+        }
+      ],
+      "last_sale": null,
+      "contract": {
+        "type": "ERC721",
+        "name": "FahTwo",
+        "symbol": "FT"
+      },
+      "collection": {
+        "collection_id": null,
+        "name": null,
+        "description": null,
+        "image_url": null,
+        "banner_image_url": null,
+        "external_url": null,
+        "twitter_username": null,
+        "discord_url": null,
+        "marketplace_pages": [],
+        "metaplex_mint": null,
+        "metaplex_first_verified_creator": null,
+        "floor_prices": []
+      },
+      "extra_metadata": {
+        "attributes": [
+          {
+            "trait_type": "Sky Color",
+            "value": "Aurora Green"
+          }
+        ],
+        "image_original_url": "ipfs://QmedCditeBrwQfJ5F3yV72rd7yuqVpD87ieYQ94tGb1hQD/0.jpg",
+        "animation_original_url": null
+      }
+    }
+  ]
+}

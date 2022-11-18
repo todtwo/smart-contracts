@@ -25,9 +25,9 @@ const config: HardhatUserConfig = {
       url: <string>process.env.ETH_GOERLI_ALCHEMY_URL,
     },
   },
-  // etherscan: {
-  //   apiKey: <string>process.env.ETHERSCAN_API_KEY,
-  // },
+  etherscan: {
+    apiKey: <string>process.env.ETHERSCAN_API_KEY,
+  },
   mocha: {
     timeout: 40000,
   },

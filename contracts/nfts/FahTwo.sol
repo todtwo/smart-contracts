@@ -16,7 +16,11 @@ contract FahTwo is ERC721, ERC721URIStorage, Ownable {
     constructor() ERC721("FahTwo", "FT") {}
 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://QmY34m4pfBDHTLdn46mrNaHqNweRKQHQBQFPaMfUJN1jJf/";
+        return "ipfs://QmRAF5XqH7sbHHnqQWh2tCPraxuw8eRPty9kmJkL2Rabj5/";
+    }
+
+    function baseURI() public pure returns (string memory) {
+        return _baseURI();
     }
 
     function safeMint(address to) public onlyOwner {
@@ -24,11 +28,7 @@ contract FahTwo is ERC721, ERC721URIStorage, Ownable {
         require(tokenId < MAX_SUPPLY, "All NFT had been minted");
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        string memory baseURI = _baseURI();
-        string memory tokenUri = string(
-            abi.encodePacked(baseURI, Strings.toString(tokenId))
-        );
-        _setTokenURI(tokenId, tokenUri);
+        _setTokenURI(tokenId, Strings.toString(tokenId));
     }
 
     // The following functions are overrides required by Solidity.

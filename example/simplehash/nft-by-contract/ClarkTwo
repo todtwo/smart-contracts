@@ -1,0 +1,73 @@
+{
+  "next": null,
+  "previous": null,
+  "nfts": [
+    {
+      "nft_id": "ethereum-goerli.0xfa6b6b5eb53f951bc4cfc607dbec230dde638ed5.0",
+      "chain": "ethereum-goerli",
+      "contract_address": "0xFA6b6B5Eb53F951Bc4CfC607DbeC230DDE638eD5",
+      "token_id": "0",
+      "name": "ClarkTwo 0",
+      "description": "ClarkTwo 0 Metadata for blockchain project",
+      "image_url": "https://cdn.simplehash.com/assets/639c2c93c17b572aa27656f65353b68fb7e7bbb2f62b8d229deaa8257aa7a87c.jpg",
+      "video_url": null,
+      "audio_url": null,
+      "model_url": null,
+      "previews": {
+        "image_small_url": "https://lh3.googleusercontent.com/um0YABEhrErqK_hwP2ije_6g9BSQBwR633etnPEXOqh8zGqQt_wD3ZQmB3w342MlyGg4rF1SkktW5z006JBaEDI2dU_DoUHgj_I=s250",
+        "image_medium_url": "https://lh3.googleusercontent.com/um0YABEhrErqK_hwP2ije_6g9BSQBwR633etnPEXOqh8zGqQt_wD3ZQmB3w342MlyGg4rF1SkktW5z006JBaEDI2dU_DoUHgj_I",
+        "image_large_url": "https://lh3.googleusercontent.com/um0YABEhrErqK_hwP2ije_6g9BSQBwR633etnPEXOqh8zGqQt_wD3ZQmB3w342MlyGg4rF1SkktW5z006JBaEDI2dU_DoUHgj_I=s1000",
+        "image_opengraph_url": "https://lh3.googleusercontent.com/um0YABEhrErqK_hwP2ije_6g9BSQBwR633etnPEXOqh8zGqQt_wD3ZQmB3w342MlyGg4rF1SkktW5z006JBaEDI2dU_DoUHgj_I=k-w1200-s2400-rj",
+        "blurhash": "UwJs5,-nxGNHR-WBbFs.0}odNGR+IpS#%1xY"
+      },
+      "background_color": null,
+      "external_url": null,
+      "created_date": "2022-11-18T07:59:36",
+      "status": "minted",
+      "token_count": 1,
+      "owner_count": 1,
+      "owners": [
+        {
+          "owner_address": "0xD6d0109a09c8e92DE5258D9ABb12e10ce887EB28",
+          "quantity": 1,
+          "first_acquired_date": "2022-11-18T07:59:36",
+          "last_acquired_date": "2022-11-18T07:59:36"
+        }
+      ],
+      "last_sale": null,
+      "contract": {
+        "type": "ERC721",
+        "name": "ClarkTwo",
+        "symbol": "CT"
+      },
+      "collection": {
+        "collection_id": null,
+        "name": null,
+        "description": null,
+        "image_url": null,
+        "banner_image_url": null,
+        "external_url": null,
+        "twitter_username": null,
+        "discord_url": null,
+        "marketplace_pages": [],
+        "metaplex_mint": null,
+        "metaplex_first_verified_creator": null,
+        "floor_prices": []
+      },
+      "extra_metadata": {
+        "attributes": [
+          {
+            "trait_type": "Quantity",
+            "value": "6"
+          },
+          {
+            "trait_type": "Apperance",
+            "value": "Whole"
+          }
+        ],
+        "image_original_url": "ipfs://QmdUcBhhwWESRMtfWEpycnJBZBxQPTooCxLVFvmuqTBTDn/0.jpg",
+        "animation_original_url": null
+      }
+    }
+  ]
+}

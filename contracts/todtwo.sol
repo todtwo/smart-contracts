@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-// Uncomment this line to use console.log
 import "hardhat/console.sol";
 
 contract todtwo {
@@ -20,31 +19,42 @@ contract todtwo {
         nftStatus status;
     }
 
-    enum nftStatus{ AVAILABLE, BEING_BORROWED, DELETED }
-    
+    enum nftStatus {
+        AVAILABLE,
+        BEING_BORROWED,
+        DELETED
+    }
+
     NFTDetails[] nftLPList;
-    mapping(address=>uint256[]) lenders;
-    mapping(address=>uint256[]) borrowers;
+    mapping(address => uint256[]) lenders;
+    mapping(address => uint256[]) borrowers;
 
-    function getAllAvailableNFTs() public view returns(NFTDetails[] memory) {
-    }
+    function getAllAvailableNFTs() public view returns (NFTDetails[] memory) {}
 
-    function getNFTDetails(uint256 _idx) public view returns(NFTDetails memory) {
-    }
+    function getNFTDetails(uint256 _idx)
+        public
+        view
+        returns (NFTDetails memory)
+    {}
 
-    function borrowNFT(uint256 _idx) public returns(bool) {
-    }
+    function borrowNFT(uint256 _idx) public returns (bool) {}
 
-    function returnNFT(
-        address _nftContAddr, uint256 idx
-    ) public returns(bool){
-    }
+    function returnNFT(address _nftContAddr, uint256 idx)
+        public
+        returns (bool)
+    {}
 
-    function viewUserLentProfile(address _userAddr) public view returns(NFTDetails[] memory) {
-    }
+    function viewUserLentProfile(address _userAddr)
+        public
+        view
+        returns (NFTDetails[] memory)
+    {}
 
-    function viewUserBorrowedProfile(address _userAddr) public view returns(NFTDetails[] memory) {
-    }
+    function viewUserBorrowedProfile(address _userAddr)
+        public
+        view
+        returns (NFTDetails[] memory)
+    {}
 
     function lendNFT(
         address _nftContAddr,
@@ -52,18 +62,9 @@ contract todtwo {
         uint256 _collFee,
         uint256 _borrowFee,
         uint256 _duration
-    ) public {
-    }
+    ) public {}
 
-    function redeemNFT(
-        address _nftContAddr, 
-        uint256 idx
-    ) public {
-    }
+    function redeemNFT(address _nftContAddr, uint256 idx) public {}
 
-    function redeemCollateral(
-        address _nftContAddr, 
-        uint256 idx
-    ) public {
-    }
+    function redeemCollateral(address _nftContAddr, uint256 idx) public {}
 }
