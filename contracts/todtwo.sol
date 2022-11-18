@@ -27,9 +27,11 @@ contract todtwo {
     mapping(address=>uint256[]) borrowers;
 
     function getAllAvailableNFTs() public view returns(NFTDetails[] memory) {
+        return nftLPList;
     }
 
     function getNFTDetails(uint256 _idx) public view returns(NFTDetails memory) {
+        return nftLPList[_idx];
     }
 
     function borrowNFT(uint256 _idx) public returns(bool) {
@@ -41,9 +43,21 @@ contract todtwo {
     }
 
     function viewUserLentProfile(address _userAddr) public view returns(NFTDetails[] memory) {
+        uint256[] memory idxs = lenders[_userAddr];
+        NFTDetails[] memory result = new NFTDetails[](idxs.length);
+        for(uint i; i < idxs.length; i++) {
+            result[i] = nftLPList[idxs[i]];
+        }
+        return result;
     }
 
     function viewUserBorrowedProfile(address _userAddr) public view returns(NFTDetails[] memory) {
+        uint256[] memory idxs = borrowers[_userAddr];
+        NFTDetails[] memory result = new NFTDetails[](idxs.length);
+        for(uint i; i < idxs.length; i++) {
+            result[i] = nftLPList[idxs[i]];
+        }
+        return result;
     }
 
     function lendNFT(
