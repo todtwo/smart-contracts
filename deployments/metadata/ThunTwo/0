@@ -1,0 +1,15 @@
+{
+  "description": "ThunTwo 0 Metadata for blockchain project",
+  "image": "ipfs://QmWUwXcYctHTpqjHZKKKXF6KyxQdoMxtak8SWFhW2TmSuS/0.jpg",
+  "name": "ThunTwo 0",
+  "attributes": [
+    {
+      "trait_type": "Sky Color",
+      "value": "Red - Purple"
+    },
+    {
+      "trait_type": "Thunder Style",
+      "value": "Vertical"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "description": "ClarkTwo 2 Metadata for blockchain project",
+  "image": "ipfs://QmdUcBhhwWESRMtfWEpycnJBZBxQPTooCxLVFvmuqTBTDn/2.jpg",
+  "name": "ClarkTwo 2",
+  "attributes": [
+    {
+      "trait_type": "Quantity",
+      "value": "1"
+    },
+    {
+      "trait_type": "Apperance",
+      "value": "Whole"
+    }
+  ]
+}

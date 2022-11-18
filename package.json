@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "hhtest": "npx hardhat test"
+    "hhtest": "npx hardhat test",
+    "hhdeploy-nft": "npx hardhat run scripts/nft-deploy.ts --network goerli",
+    "hhverify": "npx hardhat verify --network goerli"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",

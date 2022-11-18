@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-// Uncomment this line to use console.log
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
@@ -21,11 +20,15 @@ contract todtwo {
         nftStatus status;
     }
 
-    enum nftStatus{ AVAILABLE, BEING_BORROWED, DELETED }
-    
+    enum nftStatus {
+        AVAILABLE,
+        BEING_BORROWED,
+        DELETED
+    }
+
     NFTDetails[] nftLPList;
-    mapping(address=>uint256[]) lenders;
-    mapping(address=>uint256[]) borrowers;
+    mapping(address => uint256[]) lenders;
+    mapping(address => uint256[]) borrowers;
 
     function getAllAvailableNFTs() public view returns(NFTDetails[] memory) {
         return nftLPList;
@@ -35,13 +38,12 @@ contract todtwo {
         return nftLPList[_idx];
     }
 
-    function borrowNFT(uint256 _idx) public returns(bool) {
-    }
+    function borrowNFT(uint256 _idx) public returns (bool) {}
 
-    function returnNFT(
-        address _nftContAddr, uint256 idx
-    ) public returns(bool){
-    }
+    function returnNFT(address _nftContAddr, uint256 idx)
+        public
+        returns (bool)
+    {}
 
     function viewUserLentProfile(address _userAddr) public view returns(NFTDetails[] memory) {
         uint256[] memory idxs = lenders[_userAddr];
@@ -83,15 +85,7 @@ contract todtwo {
         lenders[msg.sender].push(nftLPList.length-1);
     }
 
-    function redeemNFT(
-        address _nftContAddr, 
-        uint256 idx
-    ) public {
-    }
+    function redeemNFT(address _nftContAddr, uint256 idx) public {}
 
-    function redeemCollateral(
-        address _nftContAddr, 
-        uint256 idx
-    ) public {
-    }
+    function redeemCollateral(address _nftContAddr, uint256 idx) public {}
 }
