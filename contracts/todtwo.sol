@@ -4,31 +4,33 @@ pragma solidity ^0.8.9;
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
+struct LendingConditions {
+    uint256 collateralFee;
+    uint256 borrowFee;
+    uint256 lendingDuration;
+}
+
+struct NFTDetails {
+    address nftAddress;
+    uint256 nftTokenId;
+    address lender;
+    LendingConditions condition;
+    uint256 deadline;
+    nftStatus status;
+}
+
+enum nftStatus {
+    AVAILABLE,
+    BEING_BORROWED,
+    DELETED
+}
+
 contract TodTwo {
-    struct LendingConditions {
-        uint256 collateralFee;
-        uint256 borrowFee;
-        uint256 lendingDuration;
-    }
-
-    struct NFTDetails {
-        address nftAddress;
-        uint256 nftIdx;
-        address lender;
-        LendingConditions condition;
-        uint256 deadline;
-        nftStatus status;
-    }
-
-    enum nftStatus {
-        AVAILABLE,
-        BEING_BORROWED,
-        DELETED
-    }
-
     NFTDetails[] nftLPList;
     mapping(address => uint256[]) lenders;
     mapping(address => uint256[]) borrowers;
+
+    constructor() {}
 
     function getAllAvailableNFTs() public view returns (NFTDetails[] memory) {
         return nftLPList;
@@ -87,10 +89,12 @@ contract TodTwo {
             IERC721(_nftContAddr).getApproved(_tokenId) == address(this),
             "nft not approved"
         );
+
         IERC721(_nftContAddr).transferFrom(msg.sender, address(this), _tokenId);
+
         NFTDetails memory lendingNFT = NFTDetails({
             nftAddress: _nftContAddr,
-            nftIdx: _tokenId,
+            nftTokenId: _tokenId,
             lender: msg.sender,
             condition: LendingConditions(_collFee, _borrowFee, _duration),
             deadline: 0,
@@ -103,4 +107,13 @@ contract TodTwo {
     function redeemNFT(address _nftContAddr, uint256 idx) public {}
 
     function redeemCollateral(address _nftContAddr, uint256 idx) public {}
+
+    function _removeByShifting(uint256 _index, uint256[] storage arr) private {
+        require(_index < arr.length, "index out of bound");
+
+        for (uint256 i = _index; i < arr.length - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        arr.pop();
+    }
 }
