@@ -3,6 +3,7 @@ pragma solidity ^0.8.9;
 
 // Uncomment this line to use console.log
 import "hardhat/console.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 contract todtwo {
     struct LendingConditions {
@@ -62,11 +63,24 @@ contract todtwo {
 
     function lendNFT(
         address _nftContAddr,
-        uint256 _idx,
+        uint256 _tokenId,
         uint256 _collFee,
         uint256 _borrowFee,
         uint256 _duration
     ) public {
+        // require approve nft to this address
+        require(IERC721(_nftContAddr).getApproved(_tokenId) == address(this),"nft not approved");
+        IERC721(_nftContAddr).transferFrom(msg.sender, address(this), _tokenId);
+        NFTDetails memory lendingNFT = NFTDetails({
+            nftAddress: _nftContAddr,
+            nftIdx: _tokenId,
+            lender: msg.sender,
+            condition: LendingConditions(_collFee, _borrowFee, _duration),
+            deadline: 0,
+            status: nftStatus.AVAILABLE
+        });
+        nftLPList.push(lendingNFT);
+        lenders[msg.sender].push(nftLPList.length-1);
     }
 
     function redeemNFT(
