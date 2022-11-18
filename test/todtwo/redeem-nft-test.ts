@@ -47,6 +47,12 @@ describe("Redeem NFT Test", function () {
         .ownerOf(0)
 
       expect(currentClarkTwo0OwnerAddress).to.equal(todTwo.address)
+
+      await expect(
+        todTwo.connect(lender).redeemNFT(clarkTwo.address, 1000)
+      ).to.be.revertedWith("NFT Not found")
+
+      // await todTwo.connect(lender).redeemNFT(clarkTwo.address, 0)
     })
   })
 })

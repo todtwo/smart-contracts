@@ -104,7 +104,32 @@ contract TodTwo {
         lenders[msg.sender].push(nftLPList.length - 1);
     }
 
-    function redeemNFT(address _nftContAddr, uint256 idx) public {}
+    function redeemNFT(address _nftContAddr, uint256 _tokenId) public {
+        // check isExist, else return not found
+        bool isFound = false;
+        uint256 nftDetailIdx;
+        uint256[] memory lenderIdx = lenders[msg.sender];
+        for (uint256 i = 0; i < lenderIdx.length; i++) {
+            console.log(lenderIdx[i]);
+            NFTDetails memory nftDetails = nftLPList[lenderIdx[i]];
+            // isExist
+            if (
+                nftDetails.nftAddress == _nftContAddr &&
+                nftDetails.nftTokenId == _tokenId
+            ) {
+                isFound = true;
+                nftDetailIdx = lenderIdx[i];
+                break;
+            }
+        }
+        require(isFound, "NFT Not found");
+
+        // check whether that nft is in AVAILABLE state, else return cannot redeem
+        // check whether msg.sender is the owner, else return not owner
+        // transfer that nft to owner
+        // update status to deleted
+        // call removebyshifting at lenders[msg.sender]
+    }
 
     function redeemCollateral(address _nftContAddr, uint256 idx) public {}
 
