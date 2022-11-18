@@ -5,21 +5,17 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 
-// Uncomment this line to use console.log
-import "hardhat/console.sol";
-
-contract ClarkTwo is ERC721, ERC721URIStorage, Ownable {
+contract ThunTwo is ERC721, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
     uint256 MAX_SUPPLY = 3;
 
-    constructor() ERC721("ClarkTwo", "CT") {}
+    constructor() ERC721("ThunTwo", "TT") {}
 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://QmVuuHvCPvBHfgZmZ9eTedPMyLHJabtT5oHhVNfcC9dEw5/";
+        return "ipfs://QmVYPYWQ4VfZj632YVZqxzM6TZ45sXkDxWBjZCRNg8dydT/";
     }
 
     function safeMint(address to) public onlyOwner {
