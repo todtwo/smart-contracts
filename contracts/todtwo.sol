@@ -102,13 +102,8 @@ contract TodTwo {
         uint256 toBeRemovedIdx;
         uint256[] memory borrowerIdx = borrowers[msg.sender];
         for (uint256 i = 0; i < borrowerIdx.length; i++) {
-            // console.log(lenderIdx[i]);
             NFTDetails memory nftDetails = nftLPList[borrowerIdx[i]];
             // isExist
-            // console.log(nftDetails.nftAddress);
-            // console.log(_nftContAddr);
-            // console.log(nftDetails.nftTokenId);
-            // console.log(_tokenId);
             if (
                 nftDetails.nftAddress == _nftContAddr &&
                 nftDetails.nftTokenId == _tokenId
@@ -139,7 +134,7 @@ contract TodTwo {
         // transfer nft to contract
         IERC721(_nftContAddr).transferFrom(msg.sender, address(this), _tokenId);
 
-        // transfer nft collateral to msg.sender
+        // transfer nft collateral to borrower
         _safeTransferETH(
             msg.sender,
             nftLPList[nftDetailIdx].condition.collateralFee
@@ -202,20 +197,18 @@ contract TodTwo {
         lenders[msg.sender].push(nftLPList.length - 1);
     }
 
-    function redeemNFT(address _nftContAddr, uint256 _tokenId) public {
+    function redeemNFT(address _nftContAddr, uint256 _tokenId)
+        public
+        returns (bool)
+    {
         // check isExist, else return not found
         bool isFound = false;
         uint256 nftDetailIdx;
         uint256 toBeRemovedIdx;
         uint256[] memory lenderIdx = lenders[msg.sender];
         for (uint256 i = 0; i < lenderIdx.length; i++) {
-            // console.log(lenderIdx[i]);
             NFTDetails memory nftDetails = nftLPList[lenderIdx[i]];
             // isExist
-            // console.log(nftDetails.nftAddress);
-            // console.log(_nftContAddr);
-            // console.log(nftDetails.nftTokenId);
-            // console.log(_tokenId);
             if (
                 nftDetails.nftAddress == _nftContAddr &&
                 nftDetails.nftTokenId == _tokenId
@@ -234,6 +227,12 @@ contract TodTwo {
             "Cannot redeem the current NFT now."
         );
 
+        // update status to deleted
+        nftLPList[nftDetailIdx].status = nftStatus.DELETED;
+
+        // call removebyshifting at lenders[msg.sender]
+        _removeByShifting(toBeRemovedIdx, lenders[msg.sender]);
+
         // transfer that nft to owner
         IERC721(_nftContAddr).safeTransferFrom(
             address(this),
@@ -241,14 +240,56 @@ contract TodTwo {
             _tokenId
         );
 
+        // return true if successful
+        return true;
+    }
+
+    function redeemCollateral(address _nftContAddr, uint256 _tokenId)
+        public
+        returns (bool)
+    {
+        // check isExist, else return not found
+        bool isFound = false;
+        uint256 nftDetailIdx;
+        uint256 toBeRemovedIdx;
+        uint256[] memory lenderIdx = lenders[msg.sender];
+        for (uint256 i = 0; i < lenderIdx.length; i++) {
+            NFTDetails memory nftDetails = nftLPList[lenderIdx[i]];
+            // isExist
+            if (
+                nftDetails.nftAddress == _nftContAddr &&
+                nftDetails.nftTokenId == _tokenId
+            ) {
+                isFound = true;
+                nftDetailIdx = lenderIdx[i];
+                toBeRemovedIdx = i;
+                break;
+            }
+        }
+        require(isFound, "NFT Not found");
+
+        // check whether that nft is in AVAILABLE state, else return cannot redeem
+        require(
+            nftLPList[nftDetailIdx].status == nftStatus.BEING_BORROWED &&
+                nftLPList[nftDetailIdx].deadline < block.timestamp,
+            "Cannot redeem collateral"
+        );
+
         // update status to deleted
         nftLPList[nftDetailIdx].status = nftStatus.DELETED;
 
         // call removebyshifting at lenders[msg.sender]
         _removeByShifting(toBeRemovedIdx, lenders[msg.sender]);
-    }
 
-    function redeemCollateral(address _nftContAddr, uint256 idx) public {}
+        // transfer collateral to lender
+        _safeTransferETH(
+            msg.sender,
+            nftLPList[nftDetailIdx].condition.collateralFee
+        );
+
+        // return true if successful
+        return true;
+    }
 
     // private functions
     function _removeByShifting(uint256 _index, uint256[] storage arr) private {

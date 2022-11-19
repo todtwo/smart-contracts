@@ -90,7 +90,7 @@ describe("Return NFT Test", function () {
       currentClarkTwo0OwnerAddress = await clarkTwo.connect(borrower).ownerOf(0)
       expect(currentClarkTwo0OwnerAddress).to.equal(todTwo.address)
 
-      const nftDetails = await todTwo.connect(borrower).getNFTDetails(0)
+      let nftDetails = await todTwo.connect(borrower).getNFTDetails(0)
 
       expect(nftDetails.status).to.equal(0) // AVAILABLE
       expect(nftDetails.deadline).to.equal(0)
@@ -107,6 +107,31 @@ describe("Return NFT Test", function () {
       await expect(
         todTwo.connect(borrower2).returnNFT(clarkTwo.address, 1)
       ).to.be.revertedWith("Too late to return this NFT")
+
+      // redeem collateral
+      let lenderProfile = await todTwo
+        .connect(lender)
+        .viewUserLentProfile(lender.address)
+      expect(lenderProfile.length).to.equal(2)
+
+      await expect(
+        todTwo.connect(lender).redeemCollateral(clarkTwo.address, 0)
+      ).to.be.revertedWith("Cannot redeem collateral")
+
+      await expect(
+        todTwo.connect(lender).redeemCollateral(clarkTwo.address, 1)
+      ).to.changeEtherBalances(
+        [lender, todTwo],
+        [ethers.utils.parseEther("2"), ethers.utils.parseEther("-2")]
+      )
+
+      lenderProfile = await todTwo
+        .connect(lender)
+        .viewUserLentProfile(lender.address)
+      expect(lenderProfile.length).to.equal(1)
+
+      nftDetails = await todTwo.connect(borrower).getNFTDetails(1)
+      expect(nftDetails.status).to.equal(2) // DELETED
     })
   })
 })
