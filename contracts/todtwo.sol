@@ -26,9 +26,9 @@ enum nftStatus {
 }
 
 contract TodTwo {
-    NFTDetails[] nftLPList;
-    mapping(address => uint256[]) lenders;
-    mapping(address => uint256[]) borrowers;
+    NFTDetails[] public nftLPList;
+    mapping(address => uint256[]) public lenders;
+    mapping(address => uint256[]) public borrowers;
 
     constructor() {}
 
@@ -108,27 +108,46 @@ contract TodTwo {
         // check isExist, else return not found
         bool isFound = false;
         uint256 nftDetailIdx;
+        uint256 toBeRemovedIdx;
         uint256[] memory lenderIdx = lenders[msg.sender];
         for (uint256 i = 0; i < lenderIdx.length; i++) {
-            console.log(lenderIdx[i]);
+            // console.log(lenderIdx[i]);
             NFTDetails memory nftDetails = nftLPList[lenderIdx[i]];
             // isExist
+            // console.log(nftDetails.nftAddress);
+            // console.log(_nftContAddr);
+            // console.log(nftDetails.nftTokenId);
+            // console.log(_tokenId);
             if (
                 nftDetails.nftAddress == _nftContAddr &&
                 nftDetails.nftTokenId == _tokenId
             ) {
                 isFound = true;
                 nftDetailIdx = lenderIdx[i];
+                toBeRemovedIdx = i;
                 break;
             }
         }
         require(isFound, "NFT Not found");
 
         // check whether that nft is in AVAILABLE state, else return cannot redeem
-        // check whether msg.sender is the owner, else return not owner
+        require(
+            nftLPList[nftDetailIdx].status == nftStatus.AVAILABLE,
+            "Cannot redeem the current NFT now."
+        );
+
         // transfer that nft to owner
+        IERC721(_nftContAddr).safeTransferFrom(
+            address(this),
+            msg.sender,
+            _tokenId
+        );
+
         // update status to deleted
+        nftLPList[nftDetailIdx].status = nftStatus.DELETED;
+
         // call removebyshifting at lenders[msg.sender]
+        _removeByShifting(toBeRemovedIdx, lenders[msg.sender]);
     }
 
     function redeemCollateral(address _nftContAddr, uint256 idx) public {}
