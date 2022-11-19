@@ -9,10 +9,11 @@ describe("Return NFT Test", function () {
 
   let owner: SignerWithAddress,
     lender: SignerWithAddress,
-    borrower: SignerWithAddress
+    borrower: SignerWithAddress,
+    borrower2: SignerWithAddress
 
   before(async function () {
-    ;[owner, lender, borrower] = await ethers.getSigners()
+    ;[owner, lender, borrower, borrower2] = await ethers.getSigners()
 
     // deploy nft
     ClarkTwo = await ethers.getContractFactory("ClarkTwo")
@@ -28,6 +29,7 @@ describe("Return NFT Test", function () {
 
     // owner mint ClarkTwo #0 to lender
     await clarkTwo.connect(owner).safeMint(lender.address) // tokenId 0
+    await clarkTwo.connect(owner).safeMint(lender.address) // tokenId 1
 
     // lender call lendNFT
     await clarkTwo.connect(lender).approve(todTwo.address, 0)
@@ -41,9 +43,26 @@ describe("Return NFT Test", function () {
         3600
       )
 
+    // lender call lendNFT
+    await clarkTwo.connect(lender).approve(todTwo.address, 1)
+    await todTwo
+      .connect(lender)
+      .lendNFT(
+        clarkTwo.address,
+        1,
+        ethers.utils.parseEther("2"),
+        ethers.utils.parseEther("0.1"),
+        2
+      )
+
     // borrower call borrowNFT
     await todTwo.connect(borrower).borrowNFT(0, {
       value: ethers.utils.parseEther("1.05"),
+    })
+
+    // borrower2 call borrowNFT
+    await todTwo.connect(borrower2).borrowNFT(1, {
+      value: ethers.utils.parseEther("2.10"),
     })
   })
 
@@ -81,6 +100,13 @@ describe("Return NFT Test", function () {
         .viewUserBorrowedProfile(borrower.address)
 
       expect(userBorrowedProfile.length).to.equal(0)
+
+      // late return
+      await new Promise((r) => setTimeout(r, 4000))
+      await clarkTwo.connect(borrower2).approve(todTwo.address, 1)
+      await expect(
+        todTwo.connect(borrower2).returnNFT(clarkTwo.address, 1)
+      ).to.be.revertedWith("Too late to return this NFT")
     })
   })
 })
