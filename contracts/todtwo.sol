@@ -44,7 +44,44 @@ contract TodTwo {
         return nftLPList[_idx];
     }
 
-    function borrowNFT(uint256 _idx) public returns (bool) {}
+    function borrowNFT(uint256 _idx) public payable returns (bool) {
+        // check if nft status is AVAILABLE, else return not available
+        require(
+            nftLPList[_idx].status == nftStatus.AVAILABLE,
+            "NFT unavailable"
+        );
+        // check if borrower has enough ETH balance, else return insufficient funds
+
+        require(
+            msg.value >=
+                nftLPList[_idx].condition.collateralFee +
+                    nftLPList[_idx].condition.borrowFee,
+            "Insufficient funds"
+        );
+
+        // transfer 95% of borrowfee to lender
+        _safeTransferETH(
+            nftLPList[_idx].lender,
+            (95 * nftLPList[_idx].condition.borrowFee) / 100
+        );
+
+        // update nft status to BEING_BORROWED
+        nftLPList[_idx].status = nftStatus.BEING_BORROWED;
+
+        // update deadline to block.timestamp  + lending duration
+        nftLPList[_idx].deadline =
+            block.timestamp +
+            nftLPList[_idx].condition.lendingDuration;
+
+        // transfer NFT to borrower
+        IERC721(nftLPList[_idx].nftAddress).safeTransferFrom(
+            address(this),
+            msg.sender,
+            nftLPList[_idx].nftTokenId
+        );
+
+        return true;
+    }
 
     function returnNFT(address _nftContAddr, uint256 idx)
         public
@@ -152,6 +189,7 @@ contract TodTwo {
 
     function redeemCollateral(address _nftContAddr, uint256 idx) public {}
 
+    // private functions
     function _removeByShifting(uint256 _index, uint256[] storage arr) private {
         require(_index < arr.length, "index out of bound");
 
@@ -160,4 +198,11 @@ contract TodTwo {
         }
         arr.pop();
     }
+
+    function _safeTransferETH(address to, uint256 value) internal {
+        (bool success, ) = to.call{value: value}(new bytes(0));
+        require(success, "ETH transfer failed");
+    }
+
+    receive() external payable {}
 }
