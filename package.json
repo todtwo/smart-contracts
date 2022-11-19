@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "hhtest": "npx hardhat test",
+    "hhcoverage": "npx hardhat coverage",
     "hhdeploy-nft": "npx hardhat run scripts/nft-deploy.ts --network goerli",
     "hhverify": "npx hardhat verify --network goerli"
   },

@@ -85,8 +85,6 @@ describe("Lend NFT Test", function () {
         .connect(lender)
         .callStatic.viewUserLentProfile(lender.address)
 
-      console.log(lenderProfile)
-
       expect(lenderProfile.length).to.equal(2)
     })
   })

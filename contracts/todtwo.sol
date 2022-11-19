@@ -86,10 +86,68 @@ contract TodTwo {
         return true;
     }
 
-    function returnNFT(address _nftContAddr, uint256 idx)
+    function returnNFT(address _nftContAddr, uint256 _tokenId)
         public
         returns (bool)
-    {}
+    {
+        // check if tobereturned nft is approved to this address, else return not approved yet
+        require(
+            IERC721(_nftContAddr).getApproved(_tokenId) == address(this),
+            "nft not approved"
+        );
+
+        // check isExist, else return not found
+        bool isFound = false;
+        uint256 nftDetailIdx;
+        uint256 toBeRemovedIdx;
+        uint256[] memory borrowerIdx = borrowers[msg.sender];
+        for (uint256 i = 0; i < borrowerIdx.length; i++) {
+            // console.log(lenderIdx[i]);
+            NFTDetails memory nftDetails = nftLPList[borrowerIdx[i]];
+            // isExist
+            // console.log(nftDetails.nftAddress);
+            // console.log(_nftContAddr);
+            // console.log(nftDetails.nftTokenId);
+            // console.log(_tokenId);
+            if (
+                nftDetails.nftAddress == _nftContAddr &&
+                nftDetails.nftTokenId == _tokenId
+            ) {
+                isFound = true;
+                nftDetailIdx = borrowerIdx[i];
+                toBeRemovedIdx = i;
+                break;
+            }
+        }
+        require(isFound, "NFT Not found");
+
+        // check if block.timestamp < deadline, else return too late
+        require(
+            block.timestamp < nftLPList[nftDetailIdx].deadline,
+            "Too late to return this NFT"
+        );
+
+        // update nft status to AVAILABLE
+        nftLPList[nftDetailIdx].status = nftStatus.AVAILABLE;
+
+        // update deadline to 0
+        nftLPList[nftDetailIdx].deadline = 0;
+
+        // call removebyshifting at borrowers[msg.sender] by finding
+        _removeByShifting(toBeRemovedIdx, borrowers[msg.sender]);
+
+        // transfer nft to contract
+        IERC721(_nftContAddr).transferFrom(msg.sender, address(this), _tokenId);
+
+        // transfer nft collateral to msg.sender
+        _safeTransferETH(
+            msg.sender,
+            nftLPList[nftDetailIdx].condition.collateralFee
+        );
+
+        // return true if successful
+        return true;
+    }
 
     function viewUserLentProfile(address _userAddr)
         public

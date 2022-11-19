@@ -5,10 +5,10 @@ async function main() {
     <string>process.env.PRIVATE_KEY,
     ethers.provider
   )
-  // const ClarkTwo = await ethers.getContractFactory("ClarkTwo")
-  // const clarkTwo = await ClarkTwo.connect(owner).deploy()
+  const ClarkTwo = await ethers.getContractFactory("ClarkTwo")
+  const clarkTwo = await ClarkTwo.connect(owner).deploy()
 
-  // await clarkTwo.deployed()
+  await clarkTwo.deployed()
 
   const FahTwo = await ethers.getContractFactory("FahTwo")
   const fahTwo = await FahTwo.connect(owner).deploy()
@@ -20,7 +20,7 @@ async function main() {
 
   await thunTwo.deployed()
 
-  // console.log(`ClarkTwo deployed at ${clarkTwo.address}`)
+  console.log(`ClarkTwo deployed at ${clarkTwo.address}`)
   console.log(`FahTwo deployed at ${fahTwo.address}`)
   console.log(`ThunTwo deployed at ${thunTwo.address}`)
 }

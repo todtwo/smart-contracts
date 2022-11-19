@@ -3,7 +3,7 @@ import { expect } from "chai"
 import { Contract, ContractFactory } from "ethers"
 import { ethers } from "hardhat"
 
-describe("Borrow NFT Test", function () {
+describe("Return NFT Test", function () {
   let ClarkTwo: ContractFactory, TodTwo: ContractFactory
   let clarkTwo: Contract, todTwo: Contract
 
@@ -40,46 +40,47 @@ describe("Borrow NFT Test", function () {
         ethers.utils.parseEther("0.05"),
         3600
       )
+
+    // borrower call borrowNFT
+    await todTwo.connect(borrower).borrowNFT(0, {
+      value: ethers.utils.parseEther("1.05"),
+    })
   })
 
-  describe("Borrow NFT", function () {
-    it("Should let borrower borrow NFT", async () => {
+  describe("Return NFT", function () {
+    it("Should let borrower return NFT", async () => {
       let currentClarkTwo0OwnerAddress = await clarkTwo
-        .connect(lender)
+        .connect(borrower)
         .ownerOf(0)
 
-      expect(currentClarkTwo0OwnerAddress).to.equal(todTwo.address)
+      expect(currentClarkTwo0OwnerAddress).to.equal(borrower.address)
 
-      await expect(todTwo.connect(lender).borrowNFT(1000)).to.be.reverted
-
+      // return without borrower's approval
       await expect(
-        todTwo.connect(borrower).borrowNFT(0, {
-          value: ethers.utils.parseEther("1.05"),
-        })
+        todTwo.connect(borrower).returnNFT(clarkTwo.address, 0)
+      ).to.be.revertedWith("nft not approved")
+
+      await clarkTwo.connect(borrower).approve(todTwo.address, 0)
+      await expect(
+        todTwo.connect(borrower).returnNFT(clarkTwo.address, 0)
       ).to.changeEtherBalances(
-        [lender, todTwo],
-        [
-          ethers.utils.parseEther(((0.05 * 95) / 100).toString()),
-          ethers.utils.parseEther((1.05 - (0.05 * 95) / 100).toString()),
-        ]
+        [borrower, todTwo],
+        [ethers.utils.parseEther("1"), ethers.utils.parseEther("-1")]
       )
 
-      currentClarkTwo0OwnerAddress = await clarkTwo.connect(lender).ownerOf(0)
-      expect(currentClarkTwo0OwnerAddress).to.equal(borrower.address)
+      currentClarkTwo0OwnerAddress = await clarkTwo.connect(borrower).ownerOf(0)
+      expect(currentClarkTwo0OwnerAddress).to.equal(todTwo.address)
 
       const nftDetails = await todTwo.connect(borrower).getNFTDetails(0)
 
-      expect(nftDetails.status).to.equal(1)
-
-      const blockNumBefore = await ethers.provider.getBlockNumber()
-      const blockBefore = await ethers.provider.getBlock(blockNumBefore)
-      const timestampBefore = blockBefore.timestamp
-      expect(nftDetails.deadline).to.equal(timestampBefore + 3600)
+      expect(nftDetails.status).to.equal(0) // AVAILABLE
+      expect(nftDetails.deadline).to.equal(0)
 
       const userBorrowedProfile = await todTwo
         .connect(borrower)
         .viewUserBorrowedProfile(borrower.address)
-      expect(userBorrowedProfile.length).to.equal(1)
+
+      expect(userBorrowedProfile.length).to.equal(0)
     })
   })
 })
