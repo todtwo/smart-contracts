@@ -76,6 +76,12 @@ describe("Borrow NFT Test", function () {
       const blockBefore = await ethers.provider.getBlock(blockNumBefore)
       const timestampBefore = blockBefore.timestamp
       expect(nftDetails.deadline).to.equal(timestampBefore + 3600)
+
+      const userBorrowedProfile = await todTwo
+        .connect(borrower)
+        .viewUserBorrowedProfile(borrower.address)
+      console.log(userBorrowedProfile)
+      expect(userBorrowedProfile.length).to.equal(1)
     })
   })
 })

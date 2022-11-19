@@ -73,6 +73,9 @@ contract TodTwo {
             block.timestamp +
             nftLPList[_idx].condition.lendingDuration;
 
+        // update borrowers[msg.sender]
+        borrowers[msg.sender].push(_idx);
+
         // transfer NFT to borrower
         IERC721(nftLPList[_idx].nftAddress).safeTransferFrom(
             address(this),
