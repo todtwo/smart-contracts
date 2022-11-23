@@ -172,7 +172,22 @@ IPFS Hosting CID for NFT Metadata and Images:
    - Metadata: `QmeyuTWxvrWNsQi6CJGrrTLGpkHna86MeuFL3s8Bzy9Noo`
    - Images: `QmWUwXcYctHTpqjHZKKKXF6KyxQdoMxtak8SWFhW2TmSuS`
 
+# Environment Setup
+
+Please setup the following environment variables in .env file (See .env.template)
+
+```ts
+ETH_MAINNET_ALCHEMY_URL="https://eth-mainnet.alchemyapi.io/v2/<key>"
+ETH_GOERLI_ALCHEMY_URL="https://eth-goerli.alchemyapi.io/v2/<key>"
+PRIVATE_KEY=<string>
+ETHERSCAN_API_KEY=<string>
+```
+
+See section Sample Hardhat Project
+
 # How to run
+
+See section Sample Hardhat Project
 
 # Sample Hardhat Project
 
