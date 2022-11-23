@@ -8,7 +8,7 @@ Final project of Blockchain Class 2022/1
 
 # Contracts
 
-### 1. Mock NFT Contract
+## 1. Mock NFT Contract
 
 All contracts are based on ERC721 standard.
 
@@ -16,7 +16,7 @@ All contracts are based on ERC721 standard.
 2. ClarkTwo
 3. ThunTwo
 
-### 2. Controller Contract - TodTwo
+## 2. Controller Contract - TodTwo
 
 Structs
 
