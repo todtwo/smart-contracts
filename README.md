@@ -51,13 +51,98 @@ enum nftStatus {
 
 Fields
 
-```c
+```ts
 NFTDetails[] public nftLPList; // Array of NFTDetails
 mapping(address => uint256[]) public lenders; // Array of index in nftLPList that maps between address of lenders and NFT LP details
 mapping(address => uint256[]) public borrowers; // Array of index in nftLPList that maps between address of borrowers and NFT LP details
 ```
 
 Functions
+
+```ts
+ /**
+  * @notice Get All NFT LP Details
+  */
+function getAllAvailableNFTs() public view returns (NFTDetails[] memory)
+```
+
+```ts
+/**
+  * @notice Get NFT LP Details by idx
+  * @param _idx The index of nftLPList
+  * @return NFTDetail of the coresponded NFT
+  */
+function getNFTDetails(uint256 _idx) public view returns (NFTDetails memory)
+```
+
+```ts
+/**
+  * @notice Borrow NFT
+  * @param _idx The index of nftLPList
+  * @return true if success
+  */
+function borrowNFT(uint256 _idx) public payable returns (bool)
+```
+
+```ts
+/**
+  * @notice Return NFT
+  * @param _nftContAddr NFT's contract address
+  * @param _tokenId NFT's token id
+  * @return true if success
+  */
+function returnNFT(address _nftContAddr, uint256 _tokenId) public returns (bool)
+```
+
+```ts
+/**
+  * @notice View user lent profile
+  * @param _userAddr User's Address
+  * @return Array of NFTDetails of related NFTs
+  */
+ function viewUserLentProfile(address _userAddr) public view returns (NFTDetails[] memory)
+```
+
+```ts
+/**
+  * @notice View user borrowed profile
+  * @param _userAddr User's Address
+  * @return Array of NFTDetails of related NFTs
+  */
+function viewUserBorrowedProfile(address _userAddr) public view returns (NFTDetails[] memory)
+```
+
+```ts
+/**
+  * @notice Provide NFT LP
+  * @param _nftContAddr NFT's contract address
+  * @param _tokenId NFT's token id
+  * @param _collFee Collateral Fee
+  * @param _borrowFee BorrowFee
+  * @param _duration Lending Duration
+  */
+function lendNFT(address _nftContAddr, uint256 _tokenId, uint256 _collFee, uint256 _borrowFee, uint256 _duration) public
+```
+
+```ts
+/**
+  * @notice Redeem NFT from cotroller contract
+  * @param _nftContAddr NFT's contract address
+  * @param _tokenId NFT's token id
+  * @return true if successful
+  */
+function redeemNFT(address _nftContAddr, uint256 _tokenId) public returns (bool)
+```
+
+```ts
+/**
+  * @notice Redeem NFT's collateral if exceeds deadline
+  * @param _nftContAddr NFT's contract address
+  * @param _tokenId NFT's token id
+  * @return true if successful
+  */
+function redeemCollateral(address _nftContAddr, uint256 _tokenId) public returns (bool)
+```
 
 # Deployment and Hosting
 
