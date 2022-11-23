@@ -146,6 +146,32 @@ function redeemCollateral(address _nftContAddr, uint256 _tokenId) public returns
 
 # Deployment and Hosting
 
+All contracts were deployed to Ethereum Goerli Testnet with the following addresses:
+
+1. FahTwo: `0x13502Ea6F6D14f00025a3AdDe02BFf050be24532`
+2. ClarkTwo:
+   `0xFA6b6B5Eb53F951Bc4CfC607DbeC230DDE638eD5`
+3. ThunTwo:
+   `0x40e3b499A062153158C90572f378132Bab6AB07B`
+4. TodTwo:
+   `0x81b69493Da8c5F6aE84e9c574044c4a241688FCa`
+
+IPFS Hosting CID for NFT Metadata and Images:
+
+1. FahTwo
+
+   - Metadata: `QmRAF5XqH7sbHHnqQWh2tCPraxuw8eRPty9kmJkL2Rabj5`
+   - Images: `QmedCditeBrwQfJ5F3yV72rd7yuqVpD87ieYQ94tGb1hQD`
+
+2. ClarkTwo
+
+   - Metadata: `QmWmE4SXUdAd2xRmmM6ke8Qx2Q5cxGgkxHbv7RC3xr9twH`
+   - Images: `QmdUcBhhwWESRMtfWEpycnJBZBxQPTooCxLVFvmuqTBTDn`
+
+3. ThunTwo
+   - Metadata: `QmeyuTWxvrWNsQi6CJGrrTLGpkHna86MeuFL3s8Bzy9Noo`
+   - Images: `QmWUwXcYctHTpqjHZKKKXF6KyxQdoMxtak8SWFhW2TmSuS`
+
 # How to run
 
 # Sample Hardhat Project
